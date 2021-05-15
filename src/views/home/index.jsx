@@ -5,7 +5,7 @@ class example extends Component {
     render() {
         return (
           <div>
-           <MarketStats> </MarketStats>
+           <MarketStats> Test</MarketStats>
           </div>
         );
     }
