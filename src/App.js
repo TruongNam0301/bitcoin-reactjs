@@ -5,7 +5,11 @@ import React from "react";
 import Loading from "./components/Loading";
 
 
-const Home = React.lazy(() => import("./views/home"));
+const Home = React.lazy(() => {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(import("./views/home")), 10000);
+  })
+});
 
 function App() {
   return (

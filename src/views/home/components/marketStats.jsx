@@ -15,7 +15,7 @@ function marketStats() {
   const StyledTrade = styled(StyledCol)`
     background-color: #ffff;
   `;
-  
+
 
   return (
     <Row justify="center">
@@ -34,7 +34,19 @@ function marketStats() {
                   <Col span={24}>Low $49,232.53 USD</Col>
                 </Row>
               </Col>
-              <Divider/>
+              <Divider />
+              <Col span={8}>
+                <Row wrap>
+                  <Col span={24}>High $49,803.70 USD </Col>
+                  <Col span={24}>Low $49,232.53 USD</Col>
+                </Row>
+              </Col>
+              <Col span={8}>
+                <Row wrap>
+                  <Col span={24}>High $49,803.70 USD </Col>
+                  <Col span={24}>Low $49,232.53 USD</Col>
+                </Row>
+              </Col>
               <Col span={8}>
                 <Row wrap>
                   <Col span={24}>High $49,803.70 USD </Col>
