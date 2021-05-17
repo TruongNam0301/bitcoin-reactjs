@@ -64,7 +64,7 @@ function MarketStats() {
   return (
     <PageContainer>
       <Row justify="center">
-        <Col span={14}>
+        <Col span={24}>
           <Row>
             <Col span={12}>
               <PageLabel>BITCOIN TO US DOLLARS (BTC/ USD)</PageLabel>
@@ -85,7 +85,7 @@ function MarketStats() {
                   </Col>
 
                   <Col span={8}>
-                    <Row wrap gutter={[0, 40]}>
+                    <Row wrap gutter={[0, 20]}>
                       <StatusItemContainer>
                         <StatusLabel>High</StatusLabel>
                         <Col span={24}>
@@ -102,7 +102,7 @@ function MarketStats() {
                   </Col>
 
                   <Col span={8}>
-                    <Row wrap gutter={[0, 40]}>
+                    <Row wrap gutter={[0, 20]}>
                       <StatusItemContainer>
                         <StatusLabel>High</StatusLabel>
                         <Col span={24}>
