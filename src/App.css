@@ -22,7 +22,7 @@
   }
 }
 
-.marketStats {
+/* .marketStats {
     display: flex;
     flex-direction: column;
     margin: 15px 0 50px;
@@ -35,4 +35,4 @@
 
 .marketStats .marketStats-statsWrapper > div {
     overflow: hidden;
-}
+} */
