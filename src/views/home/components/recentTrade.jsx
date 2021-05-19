@@ -46,13 +46,19 @@ function recentTrade() {
   return (
     <Row>
       <Col span={24}>
-        <StyleTitleTable>MOST RECENT TRADES</StyleTitleTable>
-        <Table
-          columns={columns}
-          dataSource={data}
-          size="small"
-          pagination={false}
-        />
+        Live Trade
+      </Col>
+      <Col>
+        <Row >
+          <Col span={24}>
+            <StyleTitleTable>MOST RECENT TRADES</StyleTitleTable>
+            <Table
+              columns={columns}
+              dataSource={data}
+              pagination={false}
+            />
+          </Col>
+        </Row>
       </Col>
     </Row>
   );

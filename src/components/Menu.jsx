@@ -3,19 +3,20 @@ import styled from "styled-components";
 import Button from "./Button";
 import logo from "../assets/icons/bitcoin-coin.png";
 import { DownOutlined } from "@ant-design/icons";
+import DropDownMenu from "./DropDownMenu";
 
 const MenuWrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
   padding: 0;
   padding-top: 70px;
-  overflow-x: scroll;
+  overflow: hidden;
   position: relative;
+  margin-bottom:50px;
 `;
 const NavigationBarContainer = styled.div`
-  width: 100vw;
+  background-color: #ffffff;
+  width: 100%;
   height: 60px;
-
   position: fixed;
   top: 0;
   left: 0;
@@ -23,37 +24,44 @@ const NavigationBarContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  border-bottom: 1px solid #ebf1f8;
+  
 `;
 const LogoContainer = styled.div`
   display: flex;
   justify-content: start;
 `;
+const StyledPriceText = styled.span`
+  font-size: 14px;
+  text-align: center;
+`;
+
 function Menu(props) {
   return (
     <MenuWrapper>
       <NavigationBarContainer>
         <Col span={14}>
-          <Row>
-            <Col span={10}>
+          <Row align="middle">
+            <Col span={9}>
               <LogoContainer>
                 <img src={logo} width={50} height={50} />
               </LogoContainer>
             </Col>
-            <Col span={14}>
-              <Row gutter={[10, 10]}>
-                <Col span={7}>
-                  <Row>
-                    <Col span={24}>
-                      <span style={{ fontSize: 13, textAlign: "center" }}>
-                        1 BTC = 44917.79 USD{" "}
-                        <DownOutlined
-                          style={{ fontSize: 14, fontWeight: "bold" }}
-                        />
-                      </span>
-                    </Col>
-                  </Row>
+            <Col span={15}>
+              <Row justify="end" align="middle" gutter={[20, 10]}>
+                <Col>
+                  <DropDownMenu trigger="hover" placement="bottomCenter">
+                    <StyledPriceText>
+                      1 BTC = 44917.79 USD <DownOutlined />
+                    </StyledPriceText>
+                  </DropDownMenu>
                 </Col>
-                <Col></Col>
+                <Col>
+                  <span>Developes</span>
+                </Col>
+                <Col>
+                  <span>ES</span>
+                </Col>
                 <Col>
                   <Button
                     labelColor="white"

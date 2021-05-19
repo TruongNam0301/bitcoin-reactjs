@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Row, Col } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import DropDownMenu from "../../../components/DropDownMenu";
 
 const StyledTrade = styled(Col)`
   background-color: #ffff;
@@ -60,17 +62,39 @@ const LastTradeValue = styled.p`
   font-weight: 500;
   color: #4f5051;
 `;
+const StypedPriceBanner = styled.span`
+  color: #4ebc42;
+  .ant-dropdown-trigger:hover & {
+    color: black;
+  }
+`;
+const StyledDropdownActive = styled(Col)`
+  .ant-dropdown-open {
+    box-shadow: inset 0px 0px 5px #c9c7c7;
+    outline: none;
+  }
+`;
 function MarketStats() {
   return (
     <PageContainer>
-      <Row justify="center">
+      <Row justify="center" gutter={[0, 15]}>
         <Col span={24}>
           <Row>
             <Col span={12}>
               <PageLabel>BITCOIN TO US DOLLARS (BTC/ USD)</PageLabel>
             </Col>
-            <Col span={12}></Col>
+            <StyledDropdownActive span={12}>
+              <DropDownMenu trigger="click" placement="bottomRight">
+                <span> MARKET </span>
+                <StypedPriceBanner> BTC/USD </StypedPriceBanner>
+                <span>
+                  <DownOutlined />
+                </span>
+              </DropDownMenu>
+            </StyledDropdownActive>
           </Row>
+        </Col>
+        <Col span={24}>
           <Row>
             <Col span={18}>
               <StatusWrapper>
@@ -83,7 +107,6 @@ function MarketStats() {
                       </StatusItemContainer>
                     </AllDayStatusContainer>
                   </Col>
-
                   <Col span={8}>
                     <Row wrap gutter={[0, 20]}>
                       <StatusItemContainer>
