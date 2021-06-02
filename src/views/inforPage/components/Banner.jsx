@@ -33,27 +33,12 @@ const StyledAnimationBanner = styled.h1`
   font-weight: 100;
   color: rgb(37, 44, 54);
 `;
-const movetext = keyframes`
-  0% {
-    bottom: -0.2em;
-    opacity: 1;
-  }
-  
-  50% {
-    bottom: 0.2em;
-  }
 
-  100% {
-    bottom: 0;
-    opacity: 1;
-  }
-`;
 const StyledAnimate = styled.span`
   color: tomato;
   position: relative;
   bottom: -1em;
   opacity: 0;
-  animation: ${movetext} 0.75s forwards;
 `;
 const StyledInput = styled.input`
   border: none;
@@ -61,28 +46,42 @@ const StyledInput = styled.input`
   outline: none;
   border-bottom: 1px solid rgb(221, 221, 221);
   padding-right: 33px;
+  position: relative;
+  z-index: 1;
 `;
 const StyledForm = styled.form`
-  height:60px;
+  height: 60px;
   background-color: white;
-`
+`;
+const StylesLabelInput = styled.label`
+  position: relative;
+  top: ${(props) => props.emaillabel};
+  transition: 500ms;
+`;
 const labels = ["dolars", "bitcoin", "trueUSD"];
 const lastIndex = labels.length - 1;
 
 function Banner(props) {
   const [label, setLabel] = useState("dolars");
-  const [emaillabel,setEmailLabel] = useState("your email")
+  const [emaillabel, setEmailLabel] = useState("26px");
   useEffect(() => {
     const intervalId = setInterval(() => {
       let index = labels.indexOf(label);
       setLabel(index === lastIndex ? labels[0] : labels[index + 1]);
-      console.log(label);
     }, 2000);
     return () => {
       clearInterval(intervalId);
     };
-  });
+  }, [label]);
 
+  const handelEmail = (e) => {
+    if (e.target.value.length > 0) {
+      setEmailLabel("0");
+    } else {
+      setEmailLabel("26px");
+    }
+  };
+  
   return (
     <div>
       <Row justify="center" align="middle">
@@ -119,8 +118,14 @@ function Banner(props) {
               <StyledForm>
                 <Row align="middle" gutter={[20, 0]}>
                   <Col>
-                    <label>{emaillabel}</label>
-                    <StyledInput type="text" placeholder="your@email.com" />
+                    <StylesLabelInput emaillabel={emaillabel}>
+                      your email
+                    </StylesLabelInput>
+                    <StyledInput
+                      type="text"
+                      placeholder="your@email.com"
+                      onChange={handelEmail}
+                    />
                   </Col>
                   <Col>
                     <Button

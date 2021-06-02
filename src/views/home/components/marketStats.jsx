@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Row, Col } from "antd";
-import { DownOutlined } from "@ant-design/icons";
-import DropDownMenu from "../../../components/DropDownMenu";
 
 const StyledTrade = styled(Col)`
   background-color: #ffff;
@@ -84,13 +82,13 @@ function MarketStats() {
               <PageLabel>BITCOIN TO US DOLLARS (BTC/ USD)</PageLabel>
             </Col>
             <StyledDropdownActive span={12}>
-              <DropDownMenu trigger="click" placement="bottomRight">
+              {/* <DropDownMenu trigger="click" placement="bottomRight">
                 <span> MARKET </span>
                 <StypedPriceBanner> BTC/USD </StypedPriceBanner>
                 <span>
                   <DownOutlined />
                 </span>
-              </DropDownMenu>
+              </DropDownMenu> */}
             </StyledDropdownActive>
           </Row>
         </Col>

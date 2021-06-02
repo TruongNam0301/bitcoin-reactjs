@@ -1,9 +1,10 @@
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "antd";
 import styled from "styled-components";
 import Button from "./Button";
 import logo from "../assets/icons/bitcoin-coin.png";
 import { DownOutlined } from "@ant-design/icons";
-import DropDownMenu from "./DropDownMenu";
+import DropDownMenu2 from "./DropDownMenu2";
 
 const MenuWrapper = styled.div`
   width: 100%;
@@ -11,12 +12,12 @@ const MenuWrapper = styled.div`
   padding-top: 70px;
   overflow: hidden;
   position: relative;
-  margin-bottom:50px;
+  margin-bottom: 50px;
 `;
 const NavigationBarContainer = styled.div`
   background-color: #ffffff;
   width: 100%;
-  height: 60px;
+  height: ${(props) => props.heightMenu};
   position: fixed;
   top: 0;
   left: 0;
@@ -25,7 +26,7 @@ const NavigationBarContainer = styled.div`
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid #ebf1f8;
-  
+  transition: 500ms;
 `;
 const LogoContainer = styled.div`
   display: flex;
@@ -37,9 +38,18 @@ const StyledPriceText = styled.span`
 `;
 
 function Menu(props) {
+  const [height, setHeight] = useState("106px");
+  const changeHeightMenu = () => {
+    if (window.scrollY >= 200) {
+      setHeight("60px");
+    } else {
+      setHeight("106px");
+    }
+  };
+  window.addEventListener("scroll", changeHeightMenu);
   return (
     <MenuWrapper>
-      <NavigationBarContainer>
+      <NavigationBarContainer heightMenu={height}>
         <Col span={14}>
           <Row align="middle">
             <Col span={9}>
@@ -50,11 +60,11 @@ function Menu(props) {
             <Col span={15}>
               <Row justify="end" align="middle" gutter={[20, 10]}>
                 <Col>
-                  <DropDownMenu trigger="hover" placement="bottomCenter">
+                  <DropDownMenu2>
                     <StyledPriceText>
                       1 BTC = 44917.79 USD <DownOutlined />
                     </StyledPriceText>
-                  </DropDownMenu>
+                  </DropDownMenu2>
                 </Col>
                 <Col>
                   <span>Developes</span>

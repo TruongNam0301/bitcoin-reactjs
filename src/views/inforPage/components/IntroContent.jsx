@@ -3,7 +3,7 @@ import { Row, Col } from "antd";
 import styled from "styled-components";
 
 const StyledLabelWapper = styled(Row)`
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 `;
 const StyledLabel = styled.div`
   font-size: 32px;
