@@ -4,7 +4,8 @@ import MarketStats from "./components/MarketStats";
 import RecentTrade from "./components/RecentTrade";
 import { useParams } from "react-router-dom";
 
-import React from "react";
+import React, { useEffect } from "react";
+import ChartRealtime from "./components/ChartRealtime";
 
 function Index(props) {
   let { id } = useParams();
@@ -12,10 +13,10 @@ function Index(props) {
     <Row justify="center">
       <Col span={14}>
         <Row gutter={[0, 50]}>
-          <Col></Col>
           <Col span={24}>
-            <MarketStats></MarketStats>
+            <MarketStats name={id}></MarketStats>
           </Col>
+          <Col span={24}>{/* <ChartRealtime /> */}</Col>
           <Col span={24}>
             <Chart />
           </Col>

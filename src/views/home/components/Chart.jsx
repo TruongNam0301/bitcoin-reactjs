@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import holcApi from "../../../api/holcApi";
 import CanvasJSReact from "../../../assets/js/canvasjs.stock.react";
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSStockChart = CanvasJSReact.CanvasJSStockChart;
@@ -16,12 +17,15 @@ class Chart extends Component {
 
   componentDidMount() {
     //Reference: https://reactjs.org/docs/faq-ajax.html#example-using-ajax-results-to-set-local-state
-    fetch("https://canvasjs.com/data/docs/btcusd2018.json")
-      .then((res) => res.json())
-      .then((data) => {
+
+    const fetchData = async () => {
+      try {
+        const response = await holcApi.get();
         var dps1 = [],
           dps2 = [],
           dps3 = [];
+        let data = response;
+
         for (var i = 0; i < data.length; i++) {
           dps1.push({
             x: new Date(data[i].date),
@@ -34,7 +38,7 @@ class Chart extends Component {
           });
           dps2.push({
             x: new Date(data[i].date),
-            y: Number(data[i].volume_usd),
+            y: Number(data[i].volume),
           });
           dps3.push({ x: new Date(data[i].date), y: Number(data[i].close) });
         }
@@ -44,7 +48,11 @@ class Chart extends Component {
           dataPoints2: dps2,
           dataPoints3: dps3,
         });
-      });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }
 
   render() {
@@ -124,8 +132,8 @@ class Chart extends Component {
           },
         ],
         slider: {
-          minimum: new Date("2018-05-01"),
-          maximum: new Date("2018-07-01"),
+          minimum: new Date("2021-03-01"),
+          maximum: new Date(),
         },
       },
     };

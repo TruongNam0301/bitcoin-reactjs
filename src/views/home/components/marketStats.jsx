@@ -72,7 +72,8 @@ const StyledDropdownActive = styled(Col)`
     outline: none;
   }
 `;
-function MarketStats() {
+function MarketStats(props) {
+  const { name } = props;
   return (
     <PageContainer>
       <Row justify="center" gutter={[0, 15]}>
@@ -81,15 +82,7 @@ function MarketStats() {
             <Col span={12}>
               <PageLabel>BITCOIN TO US DOLLARS (BTC/ USD)</PageLabel>
             </Col>
-            <StyledDropdownActive span={12}>
-              {/* <DropDownMenu trigger="click" placement="bottomRight">
-                <span> MARKET </span>
-                <StypedPriceBanner> BTC/USD </StypedPriceBanner>
-                <span>
-                  <DownOutlined />
-                </span>
-              </DropDownMenu> */}
-            </StyledDropdownActive>
+            <StyledDropdownActive span={12}>{name}</StyledDropdownActive>
           </Row>
         </Col>
         <Col span={24}>

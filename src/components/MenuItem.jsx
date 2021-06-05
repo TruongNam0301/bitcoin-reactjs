@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Row, Col } from "antd";
+import { Row, Col } from "antd";
 import styled from "styled-components";
 
 const StyledCoinInfor = styled.div`

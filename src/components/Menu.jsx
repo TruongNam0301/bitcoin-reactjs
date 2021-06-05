@@ -5,6 +5,7 @@ import Button from "./Button";
 import logo from "../assets/icons/bitcoin-coin.png";
 import { DownOutlined } from "@ant-design/icons";
 import DropDownMenu2 from "./DropDownMenu2";
+import { Link } from "react-router-dom";
 
 const MenuWrapper = styled.div`
   width: 100%;
@@ -54,7 +55,9 @@ function Menu(props) {
           <Row align="middle">
             <Col span={9}>
               <LogoContainer>
-                <img src={logo} width={50} height={50} />
+                <Link to="/">
+                  <img src={logo} width={50} height={50} />
+                </Link>
               </LogoContainer>
             </Col>
             <Col span={15}>
@@ -67,7 +70,7 @@ function Menu(props) {
                   </DropDownMenu2>
                 </Col>
                 <Col>
-                  <span>Developes</span>
+                  <Link to="/about">About Coin</Link>
                 </Col>
                 <Col>
                   <span>ES</span>

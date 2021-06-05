@@ -2,23 +2,23 @@ import React, { useState, useEffect } from "react";
 import "../assets/css/dropdown.css";
 import MenuItem from "./MenuItem";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import listCoin from "../api/listCoinAPI";
 
 function DropDownMenu2() {
   const [list, setList] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(
-        "https://api.bitso.com/v3/ticker/?book=btc_usd",
-        {
-          headers: { "Access-Control-Allow-Origin": "*" },
-        }
-      );
-      setList(response.data);
+      try {
+        const response = await listCoin.get();
+        setList(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchData();
   }, []);
+
   return (
     <nav role="navigation">
       <ul>
@@ -29,11 +29,11 @@ function DropDownMenu2() {
           <ul className="dropdown" aria-label="submenu">
             {list.map((coin, index) => (
               <li key={index}>
-                <Link to={`/btc/${coin.book}`}>
+                <Link to={`/btc/${coin.coin_id}`} >
                   <MenuItem
                     iconUrl={coin.logo}
-                    nameCoin="btc"
-                    priceCoin={coin.last}
+                    nameCoin={coin.name}
+                    priceCoin="451616"
                     percent="6.07%"
                   />
                 </Link>
