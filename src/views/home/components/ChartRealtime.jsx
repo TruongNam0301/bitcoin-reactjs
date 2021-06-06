@@ -20,10 +20,14 @@ var updateInterval = 1000;
 class ChartRealtime extends Component {
   constructor() {
     super();
+    this.state = {
+      idSetinterval: null,
+    };
     this.updateChart = this.updateChart.bind(this);
   }
   componentDidMount() {
-    setInterval(this.updateChart, updateInterval);
+    let id = setInterval(this.updateChart, updateInterval);
+    this.setState({ idSetinterval: id });
   }
   updateChart() {
     yVal = yVal + Math.round(5 + Math.random() * (-5 - 5));
@@ -33,6 +37,10 @@ class ChartRealtime extends Component {
       dps.shift();
     }
     this.chart.render();
+  }
+  componentWillUnmount() {
+    clearInterval(this.state.idSetinterval);
+    this.setState({ idSetinterval: null });
   }
   render() {
     const options = {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "../assets/css/dropdown.css";
+import "../../assets/css/dropdown.css";
 import MenuItem from "./MenuItem";
 import { Link } from "react-router-dom";
-import listCoin from "../api/listCoinAPI";
+import listCoin from "../../api/listCoinAPI";
 
 function DropDownMenu2() {
   const [list, setList] = useState([]);
@@ -27,18 +27,25 @@ function DropDownMenu2() {
             BTC
           </a>
           <ul className="dropdown" aria-label="submenu">
-            {list.map((coin, index) => (
-              <li key={index}>
-                <Link to={`/btc/${coin.coin_id}`} >
-                  <MenuItem
+            {/* {list.map((coin, index) => ( */}
+            <li>
+              <Link to={`/btc/bitcon`}>
+                {/* ${coin.coin_id} */}
+                {/* <MenuItem
                     iconUrl={coin.logo}
                     nameCoin={coin.name}
                     priceCoin="451616"
                     percent="6.07%"
-                  />
-                </Link>
-              </li>
-            ))}
+                  /> */}
+                <MenuItem
+                  iconUrl="sdasda"
+                  nameCoin="11111"
+                  priceCoin="451616"
+                  percent="6.07%"
+                />
+              </Link>
+            </li>
+            {/* ))} */}
           </ul>
         </li>
       </ul>

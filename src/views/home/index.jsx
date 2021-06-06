@@ -16,7 +16,10 @@ function Index(props) {
           <Col span={24}>
             <MarketStats name={id}></MarketStats>
           </Col>
-          <Col span={24}>{/* <ChartRealtime /> */}</Col>
+          <Col span={24}>
+            {" "}
+            <ChartRealtime />{" "}
+          </Col>
           <Col span={24}>
             <Chart />
           </Col>

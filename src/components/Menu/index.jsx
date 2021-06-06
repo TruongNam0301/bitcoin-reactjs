@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "antd";
 import styled from "styled-components";
-import Button from "./Button";
-import logo from "../assets/icons/bitcoin-coin.png";
+import Button from "../Button";
+import logo from "../../assets/icons/bitcoin-coin.png";
 import { DownOutlined } from "@ant-design/icons";
 import DropDownMenu2 from "./DropDownMenu2";
 import { Link } from "react-router-dom";

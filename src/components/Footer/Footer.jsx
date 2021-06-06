@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "antd";
 import styled from "styled-components";
-import Button from "./Button";
+import Button from "../Button";
 
 const StyledFooterWapper = styled(Row)`
   background-color: black;
@@ -44,7 +44,7 @@ function Footer(props) {
             </div>
           </Col>
           <Col span={8}>
-            <div >
+            <div>
               <Button
                 label="READ MORE"
                 labelColor="white"
