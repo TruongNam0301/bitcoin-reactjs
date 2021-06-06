@@ -2,8 +2,7 @@ import axiosClient from "./axiosClient";
 
 const holcApi = {
   get: (params) => {
-    // const url = "/statistic/get/ethereum";
-    const url = "/ltcusd2018.json";
+    const url = "/statistic/get/ethereum";
     return axiosClient.get(url, { params });
   },
 };

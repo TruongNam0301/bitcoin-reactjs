@@ -81,7 +81,7 @@ function Banner(props) {
       setEmailLabel("26px");
     }
   };
-  
+
   return (
     <div>
       <Row justify="center" align="middle">

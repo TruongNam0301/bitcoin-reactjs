@@ -24,7 +24,7 @@ class Chart extends Component {
         var dps1 = [],
           dps2 = [],
           dps3 = [];
-        let data = response;
+        let data = response.data.data;
 
         for (var i = 0; i < data.length; i++) {
           dps1.push({

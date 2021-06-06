@@ -4,7 +4,7 @@ import MarketStats from "./components/MarketStats";
 import RecentTrade from "./components/RecentTrade";
 import { useParams } from "react-router-dom";
 
-import React, { useEffect } from "react";
+import React from "react";
 import ChartRealtime from "./components/ChartRealtime";
 
 function Index(props) {

@@ -27,25 +27,18 @@ function DropDownMenu2() {
             BTC
           </a>
           <ul className="dropdown" aria-label="submenu">
-            {/* {list.map((coin, index) => ( */}
-            <li>
-              <Link to={`/btc/bitcon`}>
-                {/* ${coin.coin_id} */}
-                {/* <MenuItem
+            {list.map((coin, index) => (
+              <li key={index}>
+                <Link to={`/btc/${coin.coin_id} `}>
+                  <MenuItem
                     iconUrl={coin.logo}
                     nameCoin={coin.name}
                     priceCoin="451616"
                     percent="6.07%"
-                  /> */}
-                <MenuItem
-                  iconUrl="sdasda"
-                  nameCoin="11111"
-                  priceCoin="451616"
-                  percent="6.07%"
-                />
-              </Link>
-            </li>
-            {/* ))} */}
+                  />
+                </Link>
+              </li>
+            ))}
           </ul>
         </li>
       </ul>
