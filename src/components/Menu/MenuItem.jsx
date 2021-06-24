@@ -15,7 +15,7 @@ function MenuItem(props) {
   return (
     <StyledCoinInfor>
       <div>
-        <img src={iconUrl} width="32px" height="32px" />
+        <img src={iconUrl} alt={nameCoin} width="32px" height="32px" />
         <span>{nameCoin}</span>
       </div>
       <Row gutter={[10, 0]}>

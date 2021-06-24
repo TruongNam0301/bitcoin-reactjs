@@ -21,18 +21,3 @@
     transform: rotate(360deg);
   }
 }
-
-/* .marketStats {
-    display: flex;
-    flex-direction: column;
-    margin: 15px 0 50px;
-}
-
-.marketStats .marketStats-volumeChange {
-    align-items: center;
-    display: flex;
-}
-
-.marketStats .marketStats-statsWrapper > div {
-    overflow: hidden;
-} */

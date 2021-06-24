@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 const StyledWapper = styled.div`
   margin-top: 57px;
   display: flex;
@@ -23,6 +24,7 @@ const StyledLabel = styled.div`
 const StyledContent = styled.div`
   font-size: 18px;
 `;
+
 function SignText(props) {
   return (
     <div>

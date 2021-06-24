@@ -32,7 +32,7 @@ function BackgroundText(props) {
         <div style={{ marginBottom: "16px" }}>{props.label}</div>
         <div style={{ marginBottom: "15px" }}>{props.name}</div>
         <div style={{ marginBottom: "18px" }}>{props.description}</div>
-        <a>Learn more</a>
+        <a href="/">Learn more</a>
       </div>
       <StyledBackgroundImage
         style={{

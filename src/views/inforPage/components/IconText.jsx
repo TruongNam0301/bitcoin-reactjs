@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 const StyledIcon = styled.img`
-  background-color: rgb(108, 190, 245);
+  background-color: ${(props) => props.backgroundColor};
   padding: 8px;
   border-radius: 50%;
 `;
@@ -12,22 +12,18 @@ const StyledIconText = styled.span`
 `;
 
 function IconText(props) {
-    return (
-        <div>
-          <div style={{ marginBottom: "21px" }}>
-            <div style={{ marginBottom: "21px" }}>
-              <StyledIcon src={props.icon}/>
-            </div>
-            <StyledIconText>
-                {props.label}
-            </StyledIconText>
-          </div>
-          <span>
-              {props.text}
-          </span>
+  const { backgroundColor, icon, label, text } = props;
+  return (
+    <div>
+      <div style={{ marginBottom: "21px" }}>
+        <div style={{ marginBottom: "21px" }}>
+          <StyledIcon src={icon} backgroundColor={backgroundColor} />
         </div>
-        
-    );
+        <StyledIconText>{label}</StyledIconText>
+      </div>
+      <span>{text}</span>
+    </div>
+  );
 }
 
 export default IconText;

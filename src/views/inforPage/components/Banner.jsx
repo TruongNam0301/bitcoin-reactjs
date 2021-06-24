@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col } from "antd";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import backgroundBanner from "../../../assets/background/download.png";
 import Button from "../../../components/Button";
 
 const StyledBackground = styled(Col)`
-  margin-top: 50px;
   background: url(${backgroundBanner}) 0% 0% / 14px repeat;
   height: 604px;
   margin-bottom: 68px;
@@ -84,7 +83,7 @@ function Banner(props) {
 
   return (
     <div>
-      <Row justify="center" align="middle">
+      <Row justify="center" align="middle" style={{ marginTop: "50px" }}>
         <StyledBackground span={24}>
           <StyledLabelBanner align="middle">
             <Col span={12}>

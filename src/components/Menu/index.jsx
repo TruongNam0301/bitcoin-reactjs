@@ -5,15 +5,14 @@ import Button from "../Button";
 import logo from "../../assets/icons/bitcoin-coin.png";
 import { DownOutlined } from "@ant-design/icons";
 import DropDownMenu2 from "./DropDownMenu2";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import useFindPathName from "../../hooks/useFindPathName";
 
 const MenuWrapper = styled.div`
   width: 100%;
   padding: 0;
-  padding-top: 70px;
   overflow: hidden;
   position: relative;
-  margin-bottom: 50px;
 `;
 const NavigationBarContainer = styled.div`
   background-color: #ffffff;
@@ -39,15 +38,28 @@ const StyledPriceText = styled.span`
 `;
 
 function Menu(props) {
+  const location = useLocation();
+  const path = useFindPathName(location);
   const [height, setHeight] = useState("106px");
   const changeHeightMenu = () => {
-    if (window.scrollY >= 200) {
-      setHeight("60px");
-    } else {
+    if (window.scrollY < 200) {
       setHeight("106px");
+    } else {
+      setHeight("60px");
     }
   };
-  window.addEventListener("scroll", changeHeightMenu);
+
+  useEffect(() => {
+    if (path === "" || path === "home") {
+      setHeight("106px");
+      window.addEventListener("scroll", changeHeightMenu);
+    } else {
+      setHeight("60px");
+    }
+    return () => {
+      window.removeEventListener("scroll", changeHeightMenu);
+    };
+  }, [path]);
   return (
     <MenuWrapper>
       <NavigationBarContainer heightMenu={height}>
@@ -56,7 +68,7 @@ function Menu(props) {
             <Col span={9}>
               <LogoContainer>
                 <Link to="/">
-                  <img src={logo} width={50} height={50} />
+                  <img src={logo} alt="logo" width={50} height={50} />
                 </Link>
               </LogoContainer>
             </Col>
@@ -76,23 +88,27 @@ function Menu(props) {
                   <span>ES</span>
                 </Col>
                 <Col>
-                  <Button
-                    labelColor="white"
-                    label="Open Account"
-                    borderColor="#4ebc42"
-                    borderWidth={1}
-                    backgroundColor="#4ebc42"
-                    shape="circle"
-                  />
+                  <Link to="/sign_up">
+                    <Button
+                      labelColor="white"
+                      label="Open Account"
+                      borderColor="#4ebc42"
+                      borderWidth={1}
+                      backgroundColor="#4ebc42"
+                      shape="circle"
+                    />
+                  </Link>
                 </Col>
                 <Col>
-                  <Button
-                    label="Login"
-                    borderColor="#4ebc42"
-                    borderWidth={1}
-                    shape="circle"
-                    labelColor="#333"
-                  />
+                  <Link to="/login">
+                    <Button
+                      label="Login"
+                      borderColor="#4ebc42"
+                      borderWidth={1}
+                      shape="circle"
+                      labelColor="#333"
+                    />
+                  </Link>
                 </Col>
               </Row>
             </Col>

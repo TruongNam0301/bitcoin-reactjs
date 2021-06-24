@@ -23,7 +23,7 @@ function BackgroundText2(props) {
           Send and receive money between friends. Fast and easy, without any
           fees.
         </div>
-        <a>Learn more</a>
+        <a href="/">Learn more</a>
       </Col>
 
       <Col span={12}>
@@ -46,6 +46,7 @@ function BackgroundText2(props) {
           <div>
             <img
               src="https://assets.bitso.com/static/media/avatar.d3bc0d26.png"
+              alt="bg1"
               width="42px"
               height="42px"
             />
@@ -71,6 +72,7 @@ function BackgroundText2(props) {
           <div>
             <img
               src="https://img.icons8.com/color/32/000000/bitcoin--v1.png"
+              alt="bg2"
               width="42px"
               height="42px"
             />
@@ -80,6 +82,7 @@ function BackgroundText2(props) {
         </div>
         <img
           src="https://assets.bitso.com/static/media/emoji1.d3cc48f3.png"
+          alt="bg3"
           width="546px"
         />
       </Col>

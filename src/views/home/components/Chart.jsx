@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import holcApi from "../../../api/holcApi";
 import CanvasJSReact from "../../../assets/js/canvasjs.stock.react";
-var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSStockChart = CanvasJSReact.CanvasJSStockChart;
 
 class Chart extends Component {

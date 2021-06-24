@@ -12,7 +12,6 @@ const StyledIconRow = styled(Row)`
   margin-bottom: 106px;
 `;
 
-const url = "https://assets.bitso.com/static/media/app.a16b8f00.png";
 function index(props) {
   return (
     <Row justify="center">
@@ -28,6 +27,7 @@ function index(props) {
             <StyledIconRow gutter={[44, 0]}>
               <Col span={8}>
                 <IconText
+                  backgroundColor="rgb(108, 190, 245);"
                   icon="https://img.icons8.com/cotton/32/000000/earth-planet--v2.png"
                   label="Operate within seconds around the world"
                   text="Send and receive cryptocurrencies between friends from all over the
@@ -36,6 +36,7 @@ function index(props) {
               </Col>
               <Col span={8}>
                 <IconText
+                  backgroundColor="rgb(255, 211, 64)"
                   icon="https://img.icons8.com/color/32/000000/bitcoin--v1.png"
                   label="Operate within seconds around the world"
                   text="Send and receive cryptocurrencies between friends from all over the
@@ -44,6 +45,7 @@ function index(props) {
               </Col>
               <Col span={8}>
                 <IconText
+                  backgroundColor="rgb(255, 113, 113)"
                   icon="https://img.icons8.com/windows/32/000000/us-dollar--v1.png"
                   label=" Operate within seconds around the world"
                   text="Send and receive cryptocurrencies between friends from all over the

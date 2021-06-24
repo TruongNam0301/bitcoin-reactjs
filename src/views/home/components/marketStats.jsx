@@ -60,12 +60,7 @@ const LastTradeValue = styled.p`
   font-weight: 500;
   color: #4f5051;
 `;
-const StypedPriceBanner = styled.span`
-  color: #4ebc42;
-  .ant-dropdown-trigger:hover & {
-    color: black;
-  }
-`;
+
 const StyledDropdownActive = styled(Col)`
   .ant-dropdown-open {
     box-shadow: inset 0px 0px 5px #c9c7c7;

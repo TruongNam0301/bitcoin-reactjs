@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CanvasJSReact from "../../../assets/js/canvasjs.stock.react";
-var CanvasJS = CanvasJSReact.CanvasJS;
+
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var dps = [
   { x: 1, y: 10 },

@@ -23,9 +23,9 @@ function DropDownMenu2() {
     <nav role="navigation">
       <ul>
         <li>
-          <a href="#" aria-haspopup="true">
-            BTC
-          </a>
+          <Link to="/btc/bitcoin">
+            <div>BTC</div>
+          </Link>
           <ul className="dropdown" aria-label="submenu">
             {list.map((coin, index) => (
               <li key={index}>

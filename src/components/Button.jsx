@@ -12,8 +12,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes {
   borderWidth: Number;
   boderType: "solid" | "none" | "dash";
 }
-const StyledButton = styled.span`
-  font-size: 14px;
+const StyledButton = styled.button`
+  cursor: pointer;
+  font-size: ${(props) => props.fontSize};
+  width: 100%;
   min-width: 100px;
   height: 36px;
   padding: 8px 16px;
@@ -26,6 +28,7 @@ const StyledButton = styled.span`
   justify-content: center;
   align-items: center;
 `;
+
 function Button(props: ButtonProps) {
   const {
     labelColor = "black",
@@ -35,6 +38,9 @@ function Button(props: ButtonProps) {
     borderColor = "black",
     borderWidth = 1,
     boderType = "solid",
+    fontSize = "14px",
+    type = "button",
+    disabled,
   } = props;
   return (
     <StyledButton
@@ -44,6 +50,9 @@ function Button(props: ButtonProps) {
       borderColor={borderColor}
       borderWidth={borderWidth}
       boderType={boderType}
+      fontSize={fontSize}
+      type={type}
+      disabled={disabled}
     >
       {label}
     </StyledButton>
