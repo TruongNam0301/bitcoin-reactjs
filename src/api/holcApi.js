@@ -2,8 +2,8 @@ import axiosClient from "./axiosClient";
 
 const holcApi = {
   get: (params) => {
-    const url = "/statistic/get/ethereum";
-    return axiosClient.get(url, { params });
+    const url = `statistic/get/${params}`;
+    return axiosClient.get(url);
   },
 };
 

@@ -3,7 +3,7 @@ import { Row, Col } from "antd";
 import styled from "styled-components";
 
 const StyledLabelWapper = styled(Row)`
-  margin-bottom: 80px;
+  margin-bottom: 30px;
 `;
 const StyledLabel = styled.div`
   font-size: 32px;
@@ -18,7 +18,7 @@ const StyledContent = styled.span`
 function IntroContent(props) {
   return (
     <Row justify="center">
-      <Col >
+      <Col>
         <StyledLabelWapper justify="space-between">
           <Col>
             <StyledLabel>2 million+</StyledLabel>
@@ -36,7 +36,7 @@ function IntroContent(props) {
             <StyledLabel>7,010,222</StyledLabel>
           </Col>
         </StyledLabelWapper>
-        <Row style={{ marginBottom: "100px" }}>
+        <Row>
           <Col>
             <StyledContent>
               Evolve your money. Explore Bitso and discover new ways to use
@@ -44,8 +44,6 @@ function IntroContent(props) {
             </StyledContent>
           </Col>
         </Row>
-        
-        
       </Col>
     </Row>
   );

@@ -29,7 +29,7 @@ const StyledSwitch = styled(Switch)`
     border-radius: 100px;
     background-color: rgb(221, 247, 221);
   }
-  &.ant-switch-checked {
+  & .ant-switch-checked {
     background-color: rgb(41, 172, 0);
   }
   &.ant-switch-checked .ant-switch-handle {
@@ -42,7 +42,6 @@ const StyledSwitch = styled(Switch)`
   }
   &.ant-switch-checked .ant-switch-inner {
     margin: 0px 215px 0px 0px;
-    z-index: 99;
   }
 `;
 
@@ -84,15 +83,19 @@ const validateSChema = Yup.object().shape({
   email: Yup.string().email().required("required"),
   password: Yup.string().min(4).required("rewuired"),
   cfmpassword: Yup.string()
-    .oneOf([Yup.ref("password"), null])
+    .oneOf([Yup.ref("password"), null], "Password must match")
     .required(),
 });
 
 function SIgnUpForm(props) {
+  const [switchChecked, setSwitchChecked] = useState(true);
   const [isValid, setIsValid] = useState({
     email: false,
     password: false,
     confirmpassword: false,
+    checked1: false,
+    checked2: false,
+    checked3: false,
   });
   const isFormValid = Object.values(isValid).every((val) => val);
   const {
@@ -103,8 +106,14 @@ function SIgnUpForm(props) {
   } = useForm({
     resolver: yupResolver(validateSChema),
   });
-  const onSubmit = (data) => console.log(data);
 
+  const onSubmit = (data) => {
+    if (switchChecked) data.type = "individual";
+    else data.type = "bussiness";
+    console.log(data);
+  };
+
+  
   return (
     <Row justify="end">
       <StyledFormWapper span={12}>
@@ -112,7 +121,11 @@ function SIgnUpForm(props) {
         <StyledSwitch
           checkedChildren="Individual"
           unCheckedChildren="Business"
-          defaultChecked
+          onChange={() => {
+            setSwitchChecked(!switchChecked);
+            console.log(switchChecked);
+          }}
+          checked={switchChecked}
         ></StyledSwitch>
         <p>Grow your business globally with borderless transactions.</p>
         <Form
@@ -162,7 +175,10 @@ function SIgnUpForm(props) {
                 help={errors.email ? errors.email.message : null}
                 onChange={debounce(async () => {
                   const result = await trigger("email");
-                  setIsValid((prevState) => ({ ...prevState, email: result }));
+                  setIsValid((prevState) => ({
+                    ...prevState,
+                    email: result,
+                  }));
                 }, 500)}
               >
                 <Input {...field} />
@@ -213,13 +229,43 @@ function SIgnUpForm(props) {
             )}
           />
 
-          <Form.Item {...tailLayout} name="checkbox1" valuePropName="checked">
+          <Form.Item
+            {...tailLayout}
+            name="checkbox1"
+            valuePropName="checked"
+            onChange={() => {
+              setIsValid((prevState) => ({
+                ...prevState,
+                checked1: !prevState.checked1,
+              }));
+            }}
+          >
             <Checkbox>I accept Bitso International's </Checkbox>
           </Form.Item>
-          <Form.Item {...tailLayout} name="checkbox2" valuePropName="checked">
+          <Form.Item
+            {...tailLayout}
+            name="checkbox2"
+            valuePropName="checked"
+            onChange={() => {
+              setIsValid((prevState) => ({
+                ...prevState,
+                checked2: !prevState.checked2,
+              }));
+            }}
+          >
             <Checkbox>I want to receive Bitso news </Checkbox>
           </Form.Item>
-          <Form.Item {...tailLayout} name="checkbox3" valuePropName="checked">
+          <Form.Item
+            {...tailLayout}
+            name="checkbox3"
+            valuePropName="checked"
+            onChange={() => {
+              setIsValid((prevState) => ({
+                ...prevState,
+                checked3: !prevState.checked3,
+              }));
+            }}
+          >
             <Checkbox>I accept Bitso's </Checkbox>
           </Form.Item>
           <Form.Item {...tailLayout}>

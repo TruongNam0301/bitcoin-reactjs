@@ -4,6 +4,8 @@ import styled from "styled-components";
 import backgroundBanner from "../../../assets/background/download.png";
 import Button from "../../../components/Button";
 
+import TextTyping from "./TextTyping";
+
 const StyledBackground = styled(Col)`
   background: url(${backgroundBanner}) 0% 0% / 14px repeat;
   height: 604px;
@@ -33,12 +35,6 @@ const StyledAnimationBanner = styled.h1`
   color: rgb(37, 44, 54);
 `;
 
-const StyledAnimate = styled.span`
-  color: tomato;
-  position: relative;
-  bottom: -1em;
-  opacity: 0;
-`;
 const StyledInput = styled.input`
   border: none;
   width: 100%;
@@ -57,12 +53,15 @@ const StylesLabelInput = styled.label`
   top: ${(props) => props.emaillabel};
   transition: 500ms;
 `;
+
+const StyledTypeWriter = styled.span``;
 const labels = ["dolars", "bitcoin", "trueUSD"];
 const lastIndex = labels.length - 1;
 
-function Banner(props) {
+function Banner() {
   const [label, setLabel] = useState("dolars");
   const [emaillabel, setEmailLabel] = useState("26px");
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       let index = labels.indexOf(label);
@@ -72,7 +71,6 @@ function Banner(props) {
       clearInterval(intervalId);
     };
   }, [label]);
-
   const handelEmail = (e) => {
     if (e.target.value.length > 0) {
       setEmailLabel("0");
@@ -90,21 +88,9 @@ function Banner(props) {
               <div>
                 <StyledAnimationBanner>
                   Send
-                  <span>
-                    {label.split("").map(function (char, index) {
-                      let style = { animationDelay: 0.5 + index / 10 + "s" };
-                      return (
-                        <StyledAnimate
-                          aria-hidden="true"
-                          key={index}
-                          style={style}
-                        >
-                          {char}
-                        </StyledAnimate>
-                      );
-                    })}
-                  </span>
-                  <br /> <span>free your money</span>
+                  <TextTyping label={label} />
+                  <br />
+                  <span>free your money</span>
                 </StyledAnimationBanner>
               </div>
               <StyledDesBanner>

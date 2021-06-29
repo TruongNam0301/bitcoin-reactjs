@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import holcApi from "../../../api/holcApi";
 import CanvasJSReact from "../../../assets/js/canvasjs.stock.react";
+import { Spin } from "antd";
+import styled from "styled-components";
 var CanvasJSStockChart = CanvasJSReact.CanvasJSStockChart;
 
+const StyledDivLoading = styled.div`
+  width: 100%;
+  height: 550px;
+  margin: auto;
+`;
 class Chart extends Component {
   constructor(props) {
     super(props);
@@ -12,53 +19,61 @@ class Chart extends Component {
       dataPoints3: [],
       isLoaded: false,
     };
+    this.drawChart = this.drawChart.bind(this);
   }
 
-  componentDidMount() {
-    //Reference: https://reactjs.org/docs/faq-ajax.html#example-using-ajax-results-to-set-local-state
-
-    const fetchData = async () => {
-      try {
-        const response = await holcApi.get();
-        var dps1 = [],
-          dps2 = [],
-          dps3 = [];
-        let data = response.data.data;
-
-        for (var i = 0; i < data.length; i++) {
-          dps1.push({
-            x: new Date(data[i].date),
-            y: [
-              Number(data[i].open),
-              Number(data[i].high),
-              Number(data[i].low),
-              Number(data[i].close),
-            ],
-          });
-          dps2.push({
-            x: new Date(data[i].date),
-            y: Number(data[i].volume),
-          });
-          dps3.push({ x: new Date(data[i].date), y: Number(data[i].close) });
-        }
-        this.setState({
-          isLoaded: true,
-          dataPoints1: dps1,
-          dataPoints2: dps2,
-          dataPoints3: dps3,
+  drawChart = async (name) => {
+    try {
+      const response = await holcApi.get(name);
+      var dps1 = [],
+        dps2 = [],
+        dps3 = [];
+      let data = response.data.data;
+      for (var i = 0; i < data.length; i++) {
+        dps1.push({
+          x: new Date(data[i].date),
+          y: [
+            Number(data[i].open),
+            Number(data[i].high),
+            Number(data[i].low),
+            Number(data[i].close),
+          ],
         });
-      } catch (error) {
-        console.log(error);
+        dps2.push({
+          x: new Date(data[i].date),
+          y: Number(data[i].volume),
+        });
+        dps3.push({ x: new Date(data[i].date), y: Number(data[i].close) });
       }
-    };
-    fetchData();
+      this.setState({
+        isLoaded: true,
+        dataPoints1: dps1,
+        dataPoints2: dps2,
+        dataPoints3: dps3,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  componentDidMount() {
+    const { name } = this.props;
+    this.drawChart(name);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { name } = this.props;
+    if (prevProps.name !== name) {
+      this.setState({ isLoaded: false });
+      this.drawChart(name);
+    }
   }
 
   render() {
     const options = {
       theme: "light2",
       title: {
-        text: "Bitcoin",
+        text: this.props.name,
       },
       subtitles: [
         {
@@ -82,7 +97,7 @@ class Chart extends Component {
             },
           },
           axisY: {
-            title: "Litecoin Price",
+            title: "Coin Price",
             prefix: "$",
             tickLength: 0,
           },
@@ -131,7 +146,7 @@ class Chart extends Component {
           },
         ],
         slider: {
-          minimum: new Date("2021-03-01"),
+          minimum: new Date("2021-05-01"),
           maximum: new Date(),
         },
       },
@@ -146,12 +161,16 @@ class Chart extends Component {
         <div>
           {
             // Reference: https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator
-            this.state.isLoaded && (
+            this.state.isLoaded ? (
               <CanvasJSStockChart
                 containerProps={containerProps}
                 options={options}
                 /* onRef = {ref => this.chart = ref} */
               />
+            ) : (
+              <Spin tip="Loading...">
+                <StyledDivLoading />
+              </Spin>
             )
           }
         </div>

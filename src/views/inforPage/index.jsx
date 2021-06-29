@@ -7,6 +7,7 @@ import BackgroundText from "./components/BackgroundText";
 import styled from "styled-components";
 import BackgroundText2 from "./components/BackgriundText2";
 import SignText from "./components/SignText";
+import HotCoinTable from "./components/HotCoinTable";
 
 const StyledIconRow = styled(Row)`
   margin-bottom: 106px;
@@ -22,6 +23,9 @@ function index(props) {
           </Col>
           <Col span={22}>
             <IntroContent />
+          </Col>
+          <Col span={22}>
+            <HotCoinTable />
           </Col>
           <Col span={24}>
             <StyledIconRow gutter={[44, 0]}>

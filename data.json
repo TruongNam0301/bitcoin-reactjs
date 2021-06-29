@@ -1,0 +1,90 @@
+{
+  "code": 1,
+  "data": {
+    "data": [
+      {
+        "id": "binance",
+        "name": "Binance",
+        "country": "Cayman Islands",
+        "year_established": "2017",
+        "url": "https://www.binance.com/",
+        "image": "https://assets.coingecko.com/markets/images/52/small/binance.jpg?1519353250",
+        "description": null
+      },
+      {
+        "id": "bitfinex",
+        "name": "Bitfinex",
+        "country": "British Virgin Islands",
+        "year_established": "2014",
+        "url": "https://www.bitfinex.com",
+        "image": "https://assets.coingecko.com/markets/images/4/small/BItfinex.png?1615895883",
+        "description": null
+      }
+    ]
+  },
+  "message": "sucsess"
+}
+{
+  "code": 1,
+  "data": {
+    "data": [
+      {
+        "id": "internet-computer",
+        "name": "Internet Computer",
+        "symbol": "ICP",
+        "market_cap_rank": 21,
+        "thumb": "https://assets.coingecko.com/coins/images/14495/thumb/Internet_Computer_logo.png?1620703073",
+        "score": 0
+      },
+      {
+        "id": "matic-network",
+        "name": "Polygon",
+        "symbol": "MATIC",
+        "market_cap_rank": 16,
+        "thumb": "https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png?1624446912",
+        "score": 1
+      },
+      {
+        "id": "cartesi",
+        "name": "Cartesi",
+        "symbol": "CTSI",
+        "market_cap_rank": 165,
+        "thumb": "https://assets.coingecko.com/coins/images/11038/thumb/cartesi.png?1592288021",
+        "score": 2
+      },
+      {
+        "id": "shiba-inu",
+        "name": "Shiba Inu",
+        "symbol": "SHIB",
+        "market_cap_rank": 26,
+        "thumb": "https://assets.coingecko.com/coins/images/11939/thumb/shiba.png?1622619446",
+        "score": 3
+      },
+      {
+        "id": "smooth-love-potion",
+        "name": "Smooth Love Potion",
+        "symbol": "SLP",
+        "market_cap_rank": 322,
+        "thumb": "https://assets.coingecko.com/coins/images/10366/thumb/SLP.png?1578640057",
+        "score": 4
+      },
+      {
+        "id": "ecomi",
+        "name": "ECOMI",
+        "symbol": "OMI",
+        "market_cap_rank": 119,
+        "thumb": "https://assets.coingecko.com/coins/images/4428/thumb/ECOMI.png?1557928886",
+        "score": 5
+      },
+      {
+        "id": "binancecoin",
+        "name": "Binance Coin",
+        "symbol": "BNB",
+        "market_cap_rank": 4,
+        "thumb": "https://assets.coingecko.com/coins/images/825/thumb/binance-coin-logo.png?1547034615",
+        "score": 6
+      }
+    ]
+  },
+  "message": "sucsess"
+}

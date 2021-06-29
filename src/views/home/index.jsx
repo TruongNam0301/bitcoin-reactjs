@@ -9,6 +9,7 @@ import ChartRealtime from "./components/ChartRealtime";
 
 function Index(props) {
   let { id } = useParams();
+
   return (
     <Row justify="center">
       <Col span={14}>
@@ -17,11 +18,10 @@ function Index(props) {
             <MarketStats name={id}></MarketStats>
           </Col>
           <Col span={24}>
-            {" "}
-            <ChartRealtime />{" "}
+            <ChartRealtime />
           </Col>
           <Col span={24}>
-            <Chart />
+            <Chart name={id} />
           </Col>
           <Col span={24}>
             <Row gutter={[20, 30]}>
