@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import exchangeInforApi from "../../../api/exchangeInforApi";
-import { Card, Row, Col } from "antd";
+import { Link } from "react-router-dom";
+//import exchangeInforApi from "../../../api/exchangeInforApi";
+import { Card } from "antd";
 import styled from "styled-components";
 const { Meta } = Card;
 const StyledCard = styled(Card)`
@@ -13,18 +14,7 @@ const StyledSpan = styled.span`
 function CoinInfor(props) {
   const [isHover, setIsHover] = useState(false);
   const [isReadMore, setIsReadMore] = useState(false);
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await exchangeInforApi.get();
-  //         setData(response.data.data);
-  //         console.log(response.data.data);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, []);
+
   const handleMouseEnter = () => {
     setIsHover(true);
   };
@@ -34,15 +24,16 @@ function CoinInfor(props) {
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
-  const { info } = props;
+  const { info, url } = props;
   return (
     <StyledCard
       hoverable
       style={{ width: 400, height: "auto" }}
       onMouseEnter={() => handleMouseEnter()}
       onMouseLeave={() => handleMouseLeave()}
+      extra={<Link to={url}>More</Link>}
     >
-      {isHover == true ? (
+      {isHover === true ? (
         <Meta
           avatar={<img alt="example" src={info.image} />}
           title={info.name}

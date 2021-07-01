@@ -3,6 +3,8 @@ import holcApi from "../../../api/holcApi";
 import CanvasJSReact from "../../../assets/js/canvasjs.stock.react";
 import { Spin } from "antd";
 import styled from "styled-components";
+import { Button } from "antd";
+import { DownloadOutlined } from "@ant-design/icons";
 var CanvasJSStockChart = CanvasJSReact.CanvasJSStockChart;
 
 const StyledDivLoading = styled.div`
@@ -18,6 +20,7 @@ class Chart extends Component {
       dataPoints2: [],
       dataPoints3: [],
       isLoaded: false,
+      urldownload: "",
     };
     this.drawChart = this.drawChart.bind(this);
   }
@@ -58,15 +61,43 @@ class Chart extends Component {
 
   componentDidMount() {
     const { name } = this.props;
+    const date = Date.parse(new Date());
+    let str =
+      "https://8ed6a666c986.ngrok.io/csv/statistic?coin_id=" +
+      name +
+      "&end=" +
+      date.toString();
+    this.setState({ urldownload: str });
     this.drawChart(name);
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { name } = this.props;
+    const date = Date.parse(new Date());
     if (prevProps.name !== name) {
+      let str =
+        "https://8ed6a666c986.ngrok.io/csv/statistic?coin_id=" +
+        name +
+        "&end=" +
+        date.toString();
+      this.setState({ urldownload: str });
       this.setState({ isLoaded: false });
       this.drawChart(name);
     }
+  }
+  buttonDown(params) {
+    return (
+      <a href="https://8ed6a666c986.ngrok.io/csv/statistic_trending_last_month">
+        <Button
+          type="primary"
+          shape="round"
+          icon={<DownloadOutlined />}
+          size="large"
+        >
+          Download
+        </Button>
+      </a>
+    );
   }
 
   render() {
@@ -162,11 +193,24 @@ class Chart extends Component {
           {
             // Reference: https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator
             this.state.isLoaded ? (
-              <CanvasJSStockChart
-                containerProps={containerProps}
-                options={options}
-                /* onRef = {ref => this.chart = ref} */
-              />
+              <div>
+                <CanvasJSStockChart
+                  containerProps={containerProps}
+                  options={options}
+                  /* onRef = {ref => this.chart = ref} */
+                />
+
+                <a href={this.state.urldownload}>
+                  <Button
+                    type="primary"
+                    shape="round"
+                    icon={<DownloadOutlined />}
+                    size="large"
+                  >
+                    Download
+                  </Button>
+                </a>
+              </div>
             ) : (
               <Spin tip="Loading...">
                 <StyledDivLoading />

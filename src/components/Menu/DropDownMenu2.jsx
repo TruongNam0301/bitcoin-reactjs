@@ -22,13 +22,13 @@ function DropDownMenu2() {
   return (
     <nav role="navigation">
       <ul>
-        <li>
+        <li style={{ padding: "1em" }}>
           <Link to="/btc/bitcoin">
             <div>BTC</div>
           </Link>
           <ul className="dropdown" aria-label="submenu">
             {list.map((coin, index) => (
-              <li key={index}>
+              <li key={index} style={{ padding: "1em" }}>
                 <Link to={`/btc/${coin.coin_id} `}>
                   <MenuItem
                     iconUrl={coin.logo}

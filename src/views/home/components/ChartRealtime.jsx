@@ -1,47 +1,53 @@
+import axios from "axios";
 import React, { Component } from "react";
+import priceRealTime from "../../../api/priceRealTimeApi";
 import CanvasJSReact from "../../../assets/js/canvasjs.stock.react";
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-var dps = [
-  { x: 1, y: 10 },
-  { x: 2, y: 13 },
-  { x: 3, y: 18 },
-  { x: 4, y: 20 },
-  { x: 5, y: 17 },
-  { x: 6, y: 10 },
-  { x: 7, y: 13 },
-  { x: 8, y: 18 },
-  { x: 9, y: 20 },
-  { x: 10, y: 17 },
-]; //dataPoints.
-var xVal = dps.length + 1;
+//var dps = []; //dataPoints.
 var yVal = 15;
-var updateInterval = 1000;
+var updateInterval = 10000;
 class ChartRealtime extends Component {
   constructor() {
     super();
     this.state = {
       idSetinterval: null,
+      dpschart: [],
+      xVal: 0,
     };
     this.updateChart = this.updateChart.bind(this);
   }
+
   componentDidMount() {
     let id = setInterval(this.updateChart, updateInterval);
     this.setState({ idSetinterval: id });
   }
-  updateChart() {
-    yVal = yVal + Math.round(5 + Math.random() * (-5 - 5));
-    dps.push({ x: xVal, y: yVal });
-    xVal++;
+
+  async updateChart() {
+    const { name, dpsProps } = this.props;
+    const response = await priceRealTime.get(name);
+    const val = response.data.data.price;
+    console.log(val);
+    const dps = this.state.dpschart;
+    const yVal = val;
+    dps.push({ x: this.state.xVal, y: yVal });
+    this.setState({ xVal: this.state.xVal + 1 });
     if (dps.length > 10) {
       dps.shift();
     }
+    this.setState({ dpschart: dps });
     this.chart.render();
   }
   componentWillUnmount() {
     clearInterval(this.state.idSetinterval);
     this.setState({ idSetinterval: null });
   }
+  // componentDidUpdate(preProps, preState) {
+  //   const { name } = this.props;
+  //   if (preProps !== name) {
+  //     this.setState({ dpschart: [] });
+  //   }
+  // }
   render() {
     const options = {
       title: {
@@ -50,7 +56,7 @@ class ChartRealtime extends Component {
       data: [
         {
           type: "line",
-          dataPoints: dps,
+          dataPoints: this.state.dpschart,
         },
       ],
     };

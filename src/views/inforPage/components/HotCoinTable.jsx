@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import styled from "styled-components";
 import topHotCoin from "../../../api/topHotCoin";
+import { Button } from "antd";
+import { DownloadOutlined } from "@ant-design/icons";
 const StyledTitle = styled.div`
   & .ant-table-title {
     text-align: center;
@@ -47,17 +49,19 @@ const columns = [
     key: "market_cap_rank",
   },
 ];
+
+const url = process.env.REACT_APP_API_UR;
 function HotCoinTable(props) {
   const [data, setData] = useState();
+  const fetchData = async () => {
+    try {
+      const response = await topHotCoin.get();
+      setData(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await topHotCoin.get();
-        setData(response.data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchData();
   }, []);
 
@@ -68,7 +72,21 @@ function HotCoinTable(props) {
         columns={columns}
         pagination={{ position: ["none"] }}
         dataSource={data}
-        title={() => <p>Top Hot Coin</p>}
+        title={() => (
+          <>
+            <p>Top Hot Coin</p>
+            <a href="https://8ed6a666c986.ngrok.io/csv/statistic_trending_last_month">
+              <Button
+                type="primary"
+                shape="round"
+                icon={<DownloadOutlined />}
+                size="large"
+              >
+                Download
+              </Button>
+            </a>
+          </>
+        )}
       />
     </StyledTitle>
   );

@@ -5,6 +5,10 @@ import { useForm, Controller } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import debounce from "debounce";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../../redux/actions/userAction";
+import { useHistory } from "react-router-dom";
+import { useEffect } from "react";
 
 //layout form
 const layout = {
@@ -44,18 +48,40 @@ function FormLogin(props) {
     resolver: yupResolver(validateSchema),
   });
 
-  const onSubmit = (data) => console.log(data);
+  const userInfo = useSelector((state) => state.userReducer.userInfo);
+  const error = useSelector(
+    (state) => state.userReducer.error,
+    () => {}
+  );
 
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const onSubmit = (data) => {
+    const action = login(data);
+    dispatch(action);
+  };
+
+  useEffect(() => {
+    console.log(error);
+    if (error === "no") {
+      history.push("/");
+    }
+  }, [error]);
   return (
-    <Form {...layout} size="large"  initialValues={{ username:'default value' }}onFinish={handleSubmit(onSubmit)}>
-      <h1 style={{ textAlign: "center" }}>Login</h1>
+    <Form
+      {...layout}
+      size="large"
+      initialValues={{ username: "default value" }}
+      onFinish={handleSubmit(onSubmit)}
+    >
+      <h1 style={{ textAlign: "center" }}>Login {userInfo.name}</h1>
       <Controller
         name="email"
         control={control}
         render={({ field }) => (
           <Form.Item
             label="email"
-            name="email"
             validateStatus={errors.email ? "error" : "success"}
             help={errors.email ? errors.email.message : null}
             hasFeedback
@@ -76,7 +102,6 @@ function FormLogin(props) {
         render={({ field }) => (
           <Form.Item
             label="password"
-            name="password"
             validateFirst={true}
             validateStatus={errors.password ? "error" : "validating"}
             help={errors.password ? errors.password.message : null}
@@ -93,6 +118,13 @@ function FormLogin(props) {
       <Form.Item wrapperCol={{ offset: 6, span: 8 }}>
         <Button label="FORGOT YOUR PASSWORD?" fontSize="12px" borderWidth="0" />
       </Form.Item>
+      {error ? (
+        <Form.Item wrapperCol={{ offset: 6, span: 8 }}>
+          <div>{error}</div>
+        </Form.Item>
+      ) : (
+        "sdasdasda"
+      )}
 
       <Form.Item {...tailLayout}>
         <Button

@@ -5,3 +5,6 @@ export const userConstants = {
   GET_USER_INFO: "GET_USER_INFO",
   UPDATE_USER_INFO: "UPDATE_USER_INFO",
 };
+export const userErrorContants = {
+  ERROR_lOG_IN: "ERROR_LOG_IN",
+};

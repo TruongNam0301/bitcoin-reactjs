@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Row, Col } from "antd";
+import { Row, Col, Spin } from "antd";
+import holcToday from "../../../api/holcTodayApi";
 
 const StyledTrade = styled(Col)`
   background-color: #ffff;
@@ -61,90 +62,122 @@ const LastTradeValue = styled.p`
   color: #4f5051;
 `;
 
-const StyledDropdownActive = styled(Col)`
-  .ant-dropdown-open {
-    box-shadow: inset 0px 0px 5px #c9c7c7;
-    outline: none;
-  }
-`;
-function MarketStats(props) {
-  const { name } = props;
+const StyledDropdownActive = styled(Col)``;
+function MarketStats({ name }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [data, setData] = useState([]);
+
+  const fetch = async (name) => {
+    setIsLoaded(false);
+    const response = await holcToday.get(name);
+    setData(response.data.data);
+    setIsLoaded(true);
+  };
+
+  useEffect(() => {
+    fetch(name);
+  }, [name]);
+  console.log(data);
+  const formatPrice = (price) => {
+    return price.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+  };
   return (
     <PageContainer>
       <Row justify="center" gutter={[0, 15]}>
-        <Col span={24}>
-          <Row>
-            <Col span={12}>
-              <PageLabel>BITCOIN TO US DOLLARS (BTC/ USD)</PageLabel>
+        {isLoaded ? (
+          <>
+            <Col span={24}>
+              <Row>
+                <Col span={24}>
+                  <img src={data.logo_url} width="50px" height="50px" />
+                  <PageLabel>
+                    {data.name.toUpperCase()} TO US DOLLARS (BTC/ USD)
+                  </PageLabel>
+                </Col>
+              </Row>
             </Col>
-            <StyledDropdownActive span={12}>{name}</StyledDropdownActive>
-          </Row>
-        </Col>
-        <Col span={24}>
-          <Row>
-            <Col span={18}>
-              <StatusWrapper>
-                <StatusContainer>
-                  <Col span={8}>
-                    <AllDayStatusContainer>
-                      <StatusItemContainer>
-                        <StatusLabel>24 Hour Volume </StatusLabel>
-                        <StatusValue>$49,803.70 USD </StatusValue>
-                      </StatusItemContainer>
-                    </AllDayStatusContainer>
-                  </Col>
-                  <Col span={8}>
-                    <Row wrap gutter={[0, 20]}>
-                      <StatusItemContainer>
-                        <StatusLabel>High</StatusLabel>
-                        <Col span={24}>
-                          <StatusValue>$49,803.70 USD </StatusValue>{" "}
-                        </Col>
-                      </StatusItemContainer>
-                      <StatusItemContainer>
-                        <StatusLabel>High</StatusLabel>
-                        <Col span={24}>
-                          <StatusValue>$49,803.70 USD </StatusValue>{" "}
-                        </Col>
-                      </StatusItemContainer>
-                    </Row>
-                  </Col>
+            <Col span={24}>
+              <Row>
+                <Col span={18}>
+                  <StatusWrapper>
+                    <StatusContainer>
+                      <Col span={8}>
+                        <AllDayStatusContainer>
+                          <StatusItemContainer>
+                            <StatusLabel>24 Hour Volume </StatusLabel>
+                            <StatusValue>
+                              {formatPrice(data.volume)}
+                            </StatusValue>
+                          </StatusItemContainer>
+                        </AllDayStatusContainer>
+                      </Col>
+                      <Col span={8}>
+                        <Row wrap gutter={[0, 20]}>
+                          <StatusItemContainer>
+                            <StatusLabel>High</StatusLabel>
+                            <Col span={24}>
+                              <StatusValue>
+                                {formatPrice(data.high)}
+                              </StatusValue>
+                            </Col>
+                          </StatusItemContainer>
+                          <StatusItemContainer>
+                            <StatusLabel>Low</StatusLabel>
+                            <Col span={24}>
+                              <StatusValue>{formatPrice(data.low)}</StatusValue>
+                            </Col>
+                          </StatusItemContainer>
+                        </Row>
+                      </Col>
 
-                  <Col span={8}>
-                    <Row wrap gutter={[0, 20]}>
-                      <StatusItemContainer>
-                        <StatusLabel>High</StatusLabel>
-                        <Col span={24}>
-                          <StatusValue>$49,803.70 USD </StatusValue>
-                        </Col>
-                      </StatusItemContainer>
-                      <StatusItemContainer>
-                        <StatusLabel>High</StatusLabel>
-                        <Col span={24}>
-                          <StatusValue>$49,803.70 USD </StatusValue>{" "}
-                        </Col>
-                      </StatusItemContainer>
-                    </Row>
-                  </Col>
-                </StatusContainer>
-              </StatusWrapper>
+                      <Col span={8}>
+                        <Row wrap gutter={[0, 20]}>
+                          <StatusItemContainer>
+                            <StatusLabel>Open</StatusLabel>
+                            <Col span={24}>
+                              <StatusValue>
+                                {formatPrice(data.open)}
+                              </StatusValue>
+                            </Col>
+                          </StatusItemContainer>
+                          <StatusItemContainer>
+                            <StatusLabel>Close</StatusLabel>
+                            <Col span={24}>
+                              <StatusValue>
+                                {formatPrice(data.close)}
+                              </StatusValue>
+                            </Col>
+                          </StatusItemContainer>
+                        </Row>
+                      </Col>
+                    </StatusContainer>
+                  </StatusWrapper>
+                </Col>
+                <StyledTrade span={6}>
+                  <StyledTradeBorder align="center" justify="center">
+                    <Col span={24}>
+                      <Row align="center" justify="center">
+                        <StatusLabel>Last trade</StatusLabel>
+                      </Row>
+                    </Col>
+                    <Col span={24}>
+                      <Row align="center" justify="center">
+                        <LastTradeValue>
+                          {formatPrice(data.high)}
+                        </LastTradeValue>
+                      </Row>
+                    </Col>
+                  </StyledTradeBorder>
+                </StyledTrade>
+              </Row>
             </Col>
-            <StyledTrade span={6}>
-              <StyledTradeBorder align="center" justify="center">
-                <Col span={24}>
-                  <Row align="center" justify="center">
-                    <StatusLabel>Last trade</StatusLabel>
-                  </Row>
-                </Col>
-                <Col span={24}>
-                  <Row align="center" justify="center">
-                    <LastTradeValue>$49,432.23 USD</LastTradeValue>
-                  </Row>
-                </Col>
-              </StyledTradeBorder>
-            </StyledTrade>
-          </Row>
-        </Col>
+          </>
+        ) : (
+          <Spin tip="Loading..."></Spin>
+        )}
       </Row>
     </PageContainer>
   );

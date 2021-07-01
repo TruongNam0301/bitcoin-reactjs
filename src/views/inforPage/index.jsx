@@ -8,7 +8,7 @@ import styled from "styled-components";
 import BackgroundText2 from "./components/BackgriundText2";
 import SignText from "./components/SignText";
 import HotCoinTable from "./components/HotCoinTable";
-
+import { withRouter } from "react-router-dom";
 const StyledIconRow = styled(Row)`
   margin-bottom: 106px;
 `;
@@ -124,4 +124,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default withRouter(index);

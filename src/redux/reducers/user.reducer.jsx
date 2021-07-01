@@ -1,4 +1,4 @@
-import { userConstants } from "../constants";
+import { userConstants, userErrorContants } from "../constants";
 
 const initialState = {
   loggedIn: false,
@@ -8,20 +8,21 @@ const initialState = {
     id: "",
     token: "",
   },
+  error: "empty",
 };
 
-const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case userConstants.LOG_IN:
-      return { ...state, loggedIn: true };
+      return { ...state, loggedIn: true, error: "no" };
+    case userErrorContants.ERROR_lOG_IN:
+      return { ...state, loggedIn: false, error: true };
     case userConstants.GET_USER_INFO:
       return { ...state, userInfo: action.payload };
     case userConstants.LOG_OUT:
-      return initialState;
+      return { ...state, error: "yes", loggedIn: false };
     default: {
       return state;
     }
   }
 };
-
-export default userReducer;
