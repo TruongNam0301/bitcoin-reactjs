@@ -1,12 +1,12 @@
 import { Col, Row } from "antd";
-import Chart from "./components/Chart";
+// import Chart from "./components/Chart";
 import MarketStats from "./components/MarketStats";
 import RecentTrade from "./components/RecentTrade";
 import { useParams } from "react-router-dom";
-
 import React from "react";
 import ChartRealtime from "./components/ChartRealtime";
 import { data1, data2, data3 } from "./data";
+import ChartExample from "./components/ChartExample";
 function Index(props) {
   let { id } = useParams();
 
@@ -21,7 +21,8 @@ function Index(props) {
             <ChartRealtime nameCoin={id} dpsProps={0} />
           </Col>
           <Col span={24}>
-            <Chart name={id} />
+            {/* <Chart name={id} /> */}
+            <ChartExample />
           </Col>
           <Col span={24} style={{ paddingBottom: "40px" }}>
             <Row gutter={[20, 30]}>
