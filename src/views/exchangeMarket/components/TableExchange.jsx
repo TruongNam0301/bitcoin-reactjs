@@ -54,15 +54,11 @@ const columns = [
 ];
 
 function TableExchange({ id }) {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [arrData, setArrData] = useState("");
 
   const fetch = async (id) => {
-    setIsLoaded(false);
     const response = await exchangeInForDetail.get(id);
-    const oldarr = response.data.data;
-    console.log(oldarr);
-    setArrData(oldarr);
+    setArrData(response.data.data);
   };
   useEffect(() => {
     fetch(id);

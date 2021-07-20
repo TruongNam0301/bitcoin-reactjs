@@ -5,6 +5,7 @@ import { Spin } from "antd";
 import styled from "styled-components";
 import { Button } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
+
 var CanvasJSStockChart = CanvasJSReact.CanvasJSStockChart;
 
 const StyledDivLoading = styled.div`
@@ -63,7 +64,7 @@ class Chart extends Component {
     const { name } = this.props;
     const date = Date.parse(new Date());
     let str =
-      "https://8ed6a666c986.ngrok.io/csv/statistic?coin_id=" +
+      "http://c5814376b733.ngrok.io/csv/statistic?coin_id=" +
       name +
       "&end=" +
       date.toString();
@@ -76,7 +77,7 @@ class Chart extends Component {
     const date = Date.parse(new Date());
     if (prevProps.name !== name) {
       let str =
-        "https://8ed6a666c986.ngrok.io/csv/statistic?coin_id=" +
+        "http://c5814376b733.ngrok.io/csv/statistic?coin_id=" +
         name +
         "&end=" +
         date.toString();
@@ -87,7 +88,7 @@ class Chart extends Component {
   }
   buttonDown(params) {
     return (
-      <a href="https://8ed6a666c986.ngrok.io/csv/statistic_trending_last_month">
+      <a href={this.state.urldownload}>
         <Button
           type="primary"
           shape="round"
@@ -99,7 +100,6 @@ class Chart extends Component {
       </a>
     );
   }
-
   render() {
     const options = {
       theme: "light2",

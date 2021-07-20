@@ -4,6 +4,8 @@ import styled from "styled-components";
 import topHotCoin from "../../../api/topHotCoin";
 import { Button } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
+//import useSaveLink from "../../../hooks/useSaveLinkDownExCel";
+
 const StyledTitle = styled.div`
   & .ant-table-title {
     text-align: center;
@@ -50,20 +52,18 @@ const columns = [
   },
 ];
 
-const url = process.env.REACT_APP_API_UR;
+//const url = process.env.REACT_APP_API_UR;
 function HotCoinTable(props) {
-  const [data, setData] = useState();
-  const fetchData = async () => {
-    try {
-      const response = await topHotCoin.get();
-      setData(response.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [data, setData] = useState(null);
   useEffect(() => {
+    async function fetchData() {
+      const response = await topHotCoin.get();
+      console.log(response);
+      setData(response.data.data);
+    }
     fetchData();
   }, []);
+  // const link =  useSaveLink("csv/statistic_trending_last_month");
 
   return (
     <StyledTitle>
@@ -75,7 +75,7 @@ function HotCoinTable(props) {
         title={() => (
           <>
             <p>Top Hot Coin</p>
-            <a href="https://8ed6a666c986.ngrok.io/csv/statistic_trending_last_month">
+            <a>
               <Button
                 type="primary"
                 shape="round"

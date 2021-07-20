@@ -43,7 +43,7 @@ const StyleTitleTable = styled.div`
   padding-left: 20px;
   background-color: #d2d6d7;
 `;
-function recentTrade({ data }) {
+function recentTrade() {
   return (
     <Row>
       <Col span={24}>Live Trade</Col>

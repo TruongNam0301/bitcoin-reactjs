@@ -53,8 +53,6 @@ const StylesLabelInput = styled.label`
   top: ${(props) => props.emaillabel};
   transition: 500ms;
 `;
-
-const StyledTypeWriter = styled.span``;
 const labels = ["dolars", "bitcoin", "trueUSD"];
 const lastIndex = labels.length - 1;
 

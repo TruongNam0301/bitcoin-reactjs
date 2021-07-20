@@ -1,15 +1,15 @@
-import axiosClient from "./axiosClient";
+//import axiosClient from "./axiosClient";
 
 const userApi = {
   post: ({ email, password }) => {
     // const url = `/user/authenticate`;
     // return axiosClient.post(url, { username, password });
-    if (email === "admin@gmail.com" && password === "1234") {
-      return {
-        email: "nam@gmail.com",
-        name: "Truong Nam",
-        id: "kh1",
-      };
+    const users = JSON.parse(localStorage.getItem("users"));
+    const user = users.find(
+      (obj) => obj.email === email && obj.password === password
+    );
+    if (user) {
+      return user;
     } else {
       return { error: true };
     }

@@ -102,7 +102,12 @@ function Menu(props) {
                 {loggedIn ? (
                   <>
                     <Col>
-                      <img src={userLogo} width="35px" height="35px" />
+                      <img
+                        src={userLogo}
+                        alt="userimage"
+                        width="35px"
+                        height="35px"
+                      />
                       <span>{userInfo.name}</span>
                     </Col>
                     <Col onClick={handleLogout}>

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-//import exchangeInforApi from "../../../api/exchangeInforApi";
 import { Card } from "antd";
 import styled from "styled-components";
 const { Meta } = Card;

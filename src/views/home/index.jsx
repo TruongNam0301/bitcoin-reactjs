@@ -18,7 +18,7 @@ function Index(props) {
             <MarketStats name={id} />
           </Col>
           <Col span={24}>
-            <ChartRealtime name={id} dpsProps={0} />
+            <ChartRealtime nameCoin={id} dpsProps={0} />
           </Col>
           <Col span={24}>
             <Chart name={id} />

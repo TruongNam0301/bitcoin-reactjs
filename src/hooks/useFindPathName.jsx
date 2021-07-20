@@ -4,7 +4,7 @@ function useFindPathName(location) {
   const [path, setPath] = useState("");
   useEffect(() => {
     let array = location.pathname.split("/");
-    setPath(array[1]);
+    setPath(array[1] ? array[1] : "");
   }, [location]);
   return path;
 }

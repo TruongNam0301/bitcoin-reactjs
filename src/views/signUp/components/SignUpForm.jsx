@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Input, Select, Checkbox, Switch } from "antd";
 import styled from "styled-components";
 import Button from "../../../components/Button";
@@ -6,7 +6,11 @@ import { Controller, useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { debounce } from "debounce";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../../../redux/actions/userAction";
+import { useHistory } from "react-router-dom";
 // import { useForm } from "react-hook-form";
+
 const { Option } = Select;
 
 const StyledFormWapper = styled(Col)`
@@ -106,14 +110,23 @@ function SIgnUpForm(props) {
   } = useForm({
     resolver: yupResolver(validateSChema),
   });
+  const registering = useSelector((state) => state.registerReducer.registering);
 
+  const history = useHistory();
+  const dispatch = useDispatch();
   const onSubmit = (data) => {
     if (switchChecked) data.type = "individual";
     else data.type = "bussiness";
-    console.log(data);
+    const name = data.email.split("@")[0];
+    const { cfmpassword, ...newobj } = { ...data, name };
+    const action = register(newobj);
+    dispatch(action);
   };
-
-  
+  useEffect(() => {
+    if (registering === "success") {
+      history.push("/login");
+    }
+  }, [registering]);
   return (
     <Row justify="end">
       <StyledFormWapper span={12}>
@@ -202,7 +215,7 @@ function SIgnUpForm(props) {
                   }));
                 }, 500)}
               >
-                <Input {...field} />
+                <Input.Password {...field} />
               </Form.Item>
             )}
           />
@@ -214,6 +227,7 @@ function SIgnUpForm(props) {
               <Form.Item
                 label="confirm password"
                 name="cfmpassword"
+                dependencies={["password"]}
                 validateStatus={errors.cfmpassword ? "error" : "success"}
                 help={errors.cfmpassword ? errors.cfmpassword.message : null}
                 onChange={debounce(async () => {

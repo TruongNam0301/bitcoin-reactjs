@@ -48,11 +48,7 @@ function FormLogin(props) {
     resolver: yupResolver(validateSchema),
   });
 
-  const userInfo = useSelector((state) => state.userReducer.userInfo);
-  const error = useSelector(
-    (state) => state.userReducer.error,
-    () => {}
-  );
+  const error = useSelector((state) => state.userReducer.error);
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -63,9 +59,10 @@ function FormLogin(props) {
   };
 
   useEffect(() => {
-    console.log(error);
     if (error === "no") {
       history.push("/");
+    } else if (error === "yes") {
+      alert("your email or password is not correct");
     }
   }, [error]);
   return (
@@ -75,7 +72,6 @@ function FormLogin(props) {
       initialValues={{ username: "default value" }}
       onFinish={handleSubmit(onSubmit)}
     >
-      <h1 style={{ textAlign: "center" }}>Login {userInfo.name}</h1>
       <Controller
         name="email"
         control={control}
@@ -98,7 +94,6 @@ function FormLogin(props) {
       <Controller
         name="password"
         control={control}
-        defaultValue=""
         render={({ field }) => (
           <Form.Item
             label="password"
@@ -118,14 +113,6 @@ function FormLogin(props) {
       <Form.Item wrapperCol={{ offset: 6, span: 8 }}>
         <Button label="FORGOT YOUR PASSWORD?" fontSize="12px" borderWidth="0" />
       </Form.Item>
-      {error ? (
-        <Form.Item wrapperCol={{ offset: 6, span: 8 }}>
-          <div>{error}</div>
-        </Form.Item>
-      ) : (
-        "sdasdasda"
-      )}
-
       <Form.Item {...tailLayout}>
         <Button
           label="LOG IN"

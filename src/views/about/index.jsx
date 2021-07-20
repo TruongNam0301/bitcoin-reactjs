@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
-import exchangeInforApi from "./../../api/exchangeInforApi";
+//import exchangeInforApi from "./../../api/exchangeInforApi";
 import CoinInfor from "./components/CoinInfor";
 import { Row, Col } from "antd";
 import styled from "styled-components";
-//import market from "./data";
+import infor from "./data";
 const StyledContainer = styled(Row)`
   margin: 70px 0 70px 0;
 `;
 function About(props) {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(infor);
 
-  const fetchData = async () => {
-    const response = await exchangeInforApi.get();
-    setData(response.data.data);
-  };
+  // const fetchData = async () => {
+  //   const response = await exchangeInforApi.get();
+  //   setData(response.data.data);
+  // };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
   return (
     <StyledContainer justify="center">
       <Col span={14}>

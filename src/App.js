@@ -1,6 +1,6 @@
 import React from "react";
 import { history } from "./history";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Loading from "./components/Loading";
 import Menu from "./components/Menu/index";
 import MainFooter from "./components/Footer/MainFooter";
@@ -15,7 +15,7 @@ const SignUp = React.lazy(() => import("./views/signUp"));
 function App() {
   return (
     <React.Suspense fallback={<Loading />}>
-      <BrowserRouter history={history}>
+      <Router history={history}>
         <ScrollToTop />
         <Menu>
           <div style={{ paddingTop: "60px" }}>
@@ -30,7 +30,7 @@ function App() {
           </div>
         </Menu>
         <MainFooter />
-      </BrowserRouter>
+      </Router>
     </React.Suspense>
   );
 }

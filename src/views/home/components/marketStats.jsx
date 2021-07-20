@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { Row, Col, Spin } from "antd";
 import holcToday from "../../../api/holcTodayApi";
@@ -62,22 +62,20 @@ const LastTradeValue = styled.p`
   color: #4f5051;
 `;
 
-const StyledDropdownActive = styled(Col)``;
 function MarketStats({ name }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [data, setData] = useState([]);
 
-  const fetch = async (name) => {
+  const fetch = useCallback(async () => {
     setIsLoaded(false);
     const response = await holcToday.get(name);
     setData(response.data.data);
     setIsLoaded(true);
-  };
+  }, [name]);
 
   useEffect(() => {
-    fetch(name);
-  }, [name]);
-  console.log(data);
+    fetch();
+  }, [fetch]);
   const formatPrice = (price) => {
     return price.toLocaleString("en-US", {
       style: "currency",
@@ -92,7 +90,12 @@ function MarketStats({ name }) {
             <Col span={24}>
               <Row>
                 <Col span={24}>
-                  <img src={data.logo_url} width="50px" height="50px" />
+                  <img
+                    src={data.logo_url}
+                    alt="logo"
+                    width="50px"
+                    height="50px"
+                  />
                   <PageLabel>
                     {data.name.toUpperCase()} TO US DOLLARS (BTC/ USD)
                   </PageLabel>
